@@ -8,18 +8,35 @@ class AddPlaceScreen extends StatefulWidget {
 }
 
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
+  final _titleController = TextEditingController();
+
   @override
+   void dispose() {
+     _titleController.dispose();
+    super.dispose();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add new Place'),
       ),
       body: SingleChildScrollView(
+        padding:const EdgeInsets.all(12),
           child: Column(
+            
         children: [
-           TextField(decoration: InputDecoration(labelText: 'title'),)
+           TextField(decoration:const InputDecoration(labelText: 'title'),
+           controller: _titleController ,
+           ),
+          const  SizedBox(height: 16,),
+
+           ElevatedButton.icon(
+            onPressed:(){}, 
+            icon: Icon(Icons.add),
+            label: const Text('Add Place'))
         ],
-      )),
+      ),
+      ),
     );
   }
 }
