@@ -27,6 +27,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
         children: [
            TextField(decoration:const InputDecoration(labelText: 'title'),
            controller: _titleController ,
+           style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
            ),
           const  SizedBox(height: 16,),
 
