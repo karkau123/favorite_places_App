@@ -22,7 +22,10 @@ class _ImageinputState extends State<Imageinput> {
     if (pickedImage == null) {
       return;
     }
-    _selectedImage = File(pickedImage.path);
+    setState(() {
+       _selectedImage = File(pickedImage.path);
+    });
+    
   }
 
   @override
@@ -34,7 +37,12 @@ class _ImageinputState extends State<Imageinput> {
 
     if (_selectedImage != null)
     {
-        content = Image.file(_selectedImage! , fit:BoxFit.cover);
+        content = GestureDetector(
+          onTap: _takePicture,
+          child: Image.file(
+            _selectedImage! , fit:BoxFit.cover,width: double.infinity,height: double.infinity,
+            ),
+        );
     }
     return Container(
       decoration: BoxDecoration(
