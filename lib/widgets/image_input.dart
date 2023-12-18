@@ -3,8 +3,9 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class Imageinput extends StatefulWidget {
-  const Imageinput({super.key});
+  const Imageinput({super.key, required this.onPickImage});
 
+  final void Function(File image) onPickImage;
   @override
   State<Imageinput> createState() => _ImageinputState();
 }
@@ -23,26 +24,28 @@ class _ImageinputState extends State<Imageinput> {
       return;
     }
     setState(() {
-       _selectedImage = File(pickedImage.path);
+      _selectedImage = File(pickedImage.path);
     });
-    
+    widget.onPickImage(_selectedImage!);
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget content =  TextButton.icon(
-          onPressed: _takePicture,
-          icon: const Icon(Icons.camera),
-          label: const Text('Take Picture'));
+    Widget content = TextButton.icon(
+        onPressed: _takePicture,
+        icon: const Icon(Icons.camera),
+        label: const Text('Take Picture'));
 
-    if (_selectedImage != null)
-    {
-        content = GestureDetector(
-          onTap: _takePicture,
-          child: Image.file(
-            _selectedImage! , fit:BoxFit.cover,width: double.infinity,height: double.infinity,
-            ),
-        );
+    if (_selectedImage != null) {
+      content = GestureDetector(
+        onTap: _takePicture,
+        child: Image.file(
+          _selectedImage!,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
+      );
     }
     return Container(
       decoration: BoxDecoration(
@@ -53,7 +56,7 @@ class _ImageinputState extends State<Imageinput> {
       height: 250,
       width: double.infinity,
       alignment: Alignment.center,
-      child: content, 
+      child: content,
     );
   }
 }
