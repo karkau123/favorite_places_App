@@ -1,4 +1,4 @@
-# favorite_places
+# Advanced Gallery
 
 A new Flutter project.
 
